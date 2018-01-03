@@ -1,0 +1,306 @@
+/*!
+ * Dash - Responsive Bootstrap Dashboard Navbar - v1.4 (http://html.codbits.com/dash)
+ * Copyright CodBits (http://codbits.com)
+ * Licensed under CodeCanyon (http://codecanyon.net/licenses)
+ *
+ * Notes:
+ * 1. dnt is abbreviation of the Dash Navbar Top.
+ * 2. dnl is abbreviation of the Dash Navbar Left.
+ * 3. I do recommend using LESS for customizations.
+ *
+ */
+/* Global
+/ -------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+html:before {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  background-color: transparent;
+  -webkit-transition: background-color 300ms;
+  -o-transition: background-color 300ms;
+  transition: background-color 300ms;
+}
+html.dnl-darken:before {
+  background-color: #000;
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+  z-index: 1;
+}
+html.dnl-opacity:before {
+  background-color: #FFF;
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+  z-index: 1;
+}
+.main-wrap {
+  overflow-x: hidden;
+}
+/* Dash Navbar Top = dnt
+/ -------------------------------------------------- */
+.dash-navbar-top {
+
+}
+.dash-navbar-top .dnl-btn-toggle {
+  position: absolute;
+  left: 16px;
+  top: 16.5px;
+  font-size: 21px;
+  background-color: rgba(0, 0, 0, 0);
+  border-width: 0;
+  color: #9D9D9D;
+  outline: 0;
+}
+
+
+.dash-navbar-top .dnt-navbar-form {
+  position: relative;
+  margin-top: 14px;
+  margin-bottom: 0px;
+}
+.dash-navbar-top .dnt-navbar-form .form-control {
+  border-radius: 50px;
+}
+.dash-navbar-top .dnt-navbar-form .form-control:focus {
+  -webkit-box-shadow: 0 0 0, 0 0 0, inset 0 0 2px #333333;
+  box-shadow: 0 0 0, 0 0 0, inset 0 0 2px #333333;
+  border-color: #211f2a;
+}
+.dash-navbar-top .dnt-navbar-form .btn {
+  position: absolute;
+  background-color: transparent;
+  top: 0;
+  right: 15px;
+  outline: 0;
+}
+.dash-navbar-top .dnt-navbar-form .btn:active {
+  -webkit-box-shadow: 0 0 0;
+  box-shadow: 0 0 0;
+}
+@media (max-width: 767px) {
+  .dash-navbar-top .dnt-navbar-form .btn {
+    top: 10px;
+  }
+}
+.dash-navbar-top .dnt-avatar {
+  border-radius: 50px;
+  width: 35px;
+  height: 35px;
+  -webkit-box-shadow: 0 0 0 2px #211f2a, 0 0 0 4px #4f4a65;
+  box-shadow: 0 0 0 2px #211f2a, 0 0 0 4px #4f4a65;
+  margin-right: 3px;
+  margin: -11px 7px -11px 0;
+}
+/* Dash Navbar Left = dnl
+/ -------------------------------------------------- */
+.dash-navbar-left {
+  position: absolute;
+  background-color: #555;
+  width: 316px;
+  top: 60px;
+  overflow-y: auto;
+  z-index: 999;
+  padding-top: 5px;
+  padding-bottom: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+  -webkit-transition: left 300ms;
+  -o-transition: left 300ms;
+  transition: left 300ms;
+  border-bottom-right-radius: 5px;
+}
+
+
+.dash-navbar-left.dnl-visible {
+    left: 0;
+}
+.dash-navbar-left.dnl-visible.dnl-show {
+    left: -316px;
+}
+
+.dash-navbar-left.dnl-hidden {
+  left: -316px;
+}
+.dash-navbar-left.dnl-hidden.dnl-show {
+  left: 0;
+}
+.dash-navbar-left .dnl-nav-title {
+  text-transform: uppercase;
+  color: #7f799c;
+  border-bottom: 1px solid #443f56;
+  padding: 10px 25px;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+.dash-navbar-left .dnl-nav {
+  padding-left: 0;
+  list-style: none;
+}
+.dash-navbar-left .dnl-nav ul {
+  padding-left: 0;
+  list-style: none;
+}
+.dash-navbar-left .dnl-nav li {
+  position: relative;
+}
+.dash-navbar-left .dnl-nav li a {
+  display: block;
+  outline: 0;
+  padding: 8px 25px 7px;
+  font-size: 13px;
+  color: #b7b4c7;
+}
+.dash-navbar-left .dnl-nav li a:hover,
+.dash-navbar-left .dnl-nav li a:focus,
+.dash-navbar-left .dnl-nav li a:active {
+  color: #eeeeee;
+  text-decoration: none;
+  background-color: #54503e;
+  -webkit-box-shadow: inset 3px 0 0 #eadb4f;
+  box-shadow: inset 3px 0 0 #eadb4f;
+}
+.dash-navbar-left .dnl-nav li a:hover .badge,
+.dash-navbar-left .dnl-nav li a:focus .badge {
+  color: #EEE;
+}
+.dash-navbar-left .dnl-nav li a > .dnl-link-icon {
+  padding-right: 8px;
+}
+.dash-navbar-left .dnl-nav li a > .dnl-btn-sub-collapse {
+  position: absolute;
+  right: 25px;
+  top: 10px;
+}
+.dash-navbar-left .dnl-nav li a > .badge {
+  position: absolute;
+  right: 24px;
+  top: 6px;
+  padding: 3px 10px;
+  color: #a7a9ac;
+  background-color: transparent;
+  border: 1px solid #4f4a65;
+}
+.dash-navbar-left .dnl-nav li a.collapsed .dnl-btn-sub-collapse {
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.dash-navbar-left .dnl-nav li.active > a {
+  background-color: #443f56;
+  -webkit-box-shadow: inset 3px 0 0 #eb4f9a;
+  box-shadow: inset 3px 0 0 #eb4f9a;
+}
+.dash-navbar-left .dnl-nav li .dnl-sub-one {
+  background-color: #15141b;
+}
+.dash-navbar-left .dnl-nav li .dnl-sub-one li {
+  border-top: 1px solid #1c1b24;
+}
+.dash-navbar-left .dnl-nav li .dnl-sub-one li a {
+  display: block;
+  color: #a7a9ac;
+}
+.dash-navbar-left .dnl-nav li .dnl-sub-one li a:hover,
+.dash-navbar-left .dnl-nav li .dnl-sub-one li a:focus {
+  color: #eeeeee;
+  background-color: #1c1b24;
+  -webkit-box-shadow: inset 3px 0 0 #1c1b24;
+  box-shadow: inset 3px 0 0 #1c1b24;
+}
+.dash-navbar-left .dnl-nav li .dnl-sub-one li a > .dnl-link-icon {
+  padding-right: 8px;
+}
+.dash-navbar-left .dnl-nav li .dnl-sub-one li a > .badge {
+  color: #a7a9ac;
+  background-color: transparent;
+  border: 1px solid #211f2a;
+}
+.dash-navbar-left .dnl-nav li .dnl-sub-one li.active > a {
+  background-color: #1c1b24;
+  -webkit-box-shadow: inset 3px 0 0 #1c1b24;
+  box-shadow: inset 3px 0 0 #1c1b24;
+}
+.dash-navbar-left .dnl-nav li .dnl-sub-two {
+  background-color: #211f2a;
+}
+.dash-navbar-left .dnl-nav li .dnl-sub-two li {
+  border-top-color: 1px solid #282533;
+}
+.dash-navbar-left .dnl-nav li .dnl-sub-two li a {
+  color: #a7a9ac;
+}
+.dash-navbar-left .dnl-nav li .dnl-sub-two li a:hover,
+.dash-navbar-left .dnl-nav li .dnl-sub-two li a:focus {
+  color: #eeeeee;
+  background-color: #282533;
+  -webkit-box-shadow: inset 3px 0 0 #282533;
+  box-shadow: inset 3px 0 0 #282533;
+}
+.dash-navbar-left .dnl-nav li .dnl-sub-two li a > .badge {
+  color: #a7a9ac;
+  background-color: transparent;
+  border: 1px solid #211f2a;
+}
+.dash-navbar-left .dnl-nav li .dnl-sub-two li.active > a {
+  background-color: #1c1b24;
+  -webkit-box-shadow: inset 3px 0 0 #1c1b24;
+  box-shadow: inset 3px 0 0 #1c1b24;
+}
+/* Content wrap
+/ -------------------------------------------------- */
+.content-wrap {
+  position: relative;
+}
+.content-wrap.dnl-visible {
+  margin-left: 317px;
+}
+
+  .content-wrap.dnl-visible {
+    margin-left: 317px;
+    -webkit-transition: all 300ms;
+    -o-transition: all 300ms;
+    transition: all 300ms;
+  }
+  .content-wrap.dnl-visible.dnl-push {
+    -webkit-transform: translate(-317px, 0);
+    -ms-transform: translate(-317px, 0);
+    -o-transform: translate(-317px, 0);
+    transform: translate(-317px, 0);
+    width: 100%;
+  }
+
+
+@media (max-width: 767px) {
+  .content-wrap.dnl-visible {
+    margin-left: 0;
+    -webkit-transition: all 300ms;
+    -o-transition: all 300ms;
+    transition: all 300ms;
+  }
+  .content-wrap.dnl-visible.dnl-push {
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
+  }
+}
+.content-wrap.dnl-hidden {
+  margin-left: 0;
+  -webkit-transition: all 300ms;
+  -o-transition: all 300ms;
+  transition: all 300ms;
+}
+.content-wrap.dnl-hidden.dnl-push {
+  -webkit-transform: translate(317px, 0);
+  -ms-transform: translate(317px, 0);
+  -o-transform: translate(317px, 0);
+  transform: translate(317px, 0);
+}
