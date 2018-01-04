@@ -105,4 +105,9 @@ return array(
 	"note_your_account_withdraw" => "This is account information we will use to send money for you.",
 	"notify_deposit_disable"	=> "Sorry. The deposit function of :coin is disabled",
 	"notify_withdraw_disable"	=> "Sorry. The withdraw function of :coin is disabled",
+	"email"=>"Email",
+	"password"	=> "Password",
+	"confirm_password"	=> "Confirm Password",
+
+
 );

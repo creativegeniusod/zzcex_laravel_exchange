@@ -84,7 +84,7 @@ class RegisterController extends Controller
 
         $user->referral = $request->get( 'referral' );
         $user->banned = 0;
-
+       
         //$user->password_confirmation = $password;
         $user->confirmation_code = $password;
         $trade_key = md5($user->username.$user->email.time());

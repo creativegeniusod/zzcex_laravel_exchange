@@ -54,7 +54,12 @@ class Order extends Model
         $str_limit = '';
         if($limit > 0) $str_limit = " limit ".$limit;       
         $status = "'".implode("','", $this->status_active)."'";        
-        $orders = DB::select("select * ,sum(`from_value`) as total_from_value, sum(`to_value`) as total_to_value from `".$this->table."` where `market_id` = '".$market_id."' and `type` = '".$type."' and `status` in (".$status.") group by `price` order by `price` ".$desc.$str_limit);              
+    
+        /* 
+        *5.6 version query
+        $orders = DB::select("select * ,sum(`from_value`) as total_from_value, sum(`to_value`) as total_to_value from `".$this->table."` where `market_id` = '".$market_id."' and `type` = '".$type."' and `status` in (".$status.") group by `price` order by `price` ".$desc.$str_limit);
+        */
+        $orders = DB::select("select * ,sum(`from_value`) as total_from_value, sum(`to_value`) as total_to_value from `".$this->table."` where `market_id` = '".$market_id."' and `type` = '".$type."' and `status` in (".$status.") group by `price`,`from_value`, `to_value`, `id`,`market_id`,`user_id`,`type`,`status`,`created_at`,`updated_at`order by `price` ".$desc.$str_limit);
         return $orders;
     }
 

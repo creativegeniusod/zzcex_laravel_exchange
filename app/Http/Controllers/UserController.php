@@ -221,8 +221,10 @@ class UserController extends Controller {
                 echo 1;
                 exit;
             } else {
-                if(User::find($user->id)->hasRole('Admin')) return Redirect::to('admin');
-                else return Redirect::to('user/profile')->with( 'notice', "Welcome to cryptoexchange. You can now start Trading." ); // change it to '/admin', '/dashboard' or something
+                if(User::find($user->id)->hasRole('Admin')) 
+                    return Redirect::to('admin');
+                else 
+                    return Redirect::to('user/profile')->with( 'notice', "Welcome to cryptoexchange. You can now start Trading." ); // change it to '/admin', '/dashboard' or something
             }
         }
     }
@@ -490,6 +492,7 @@ class UserController extends Controller {
         $wallet = new Wallet();
         $setting = new Setting();
         $data['disable_points']=$setting->getSetting('disable_points',0);
+        
         switch ($page) {
             case 'balances':
                 $wallets = Wallet::orderBy('name')->get()->toArray();

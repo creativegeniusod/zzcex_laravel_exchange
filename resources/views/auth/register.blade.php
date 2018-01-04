@@ -94,14 +94,14 @@
                 termsofservice: "Please accept our TOS."
             },
             submitHandler: function(form) {
-              var challengeField = $("input#recaptcha_challenge_field").val();
+            var challengeField = $("input#recaptcha_challenge_field").val();
             var responseField = $("input#recaptcha_response_field").val();
             console.log('responseField',responseField);
             // console.log('responseField',responseField);
             var _token = $('meta[name="csrf-token"]').attr('content');
             
             $.get('<?php echo action('UserController@checkCaptcha')?>', {recaptcha_challenge_field: challengeField, recaptcha_response_field: responseField}, function(response){
-
+                console.log('captcha response',response);
                 if(response == 1)
                 {
                   $('button[type=submit]').hide();

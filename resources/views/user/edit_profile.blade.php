@@ -34,7 +34,8 @@
                 <td><input type="text" value="{{$profile['lastname']}}" id="lastname" name="lastname" class="form-control" required="" minlength="2" class="valid"></td>
             </tr>
             <tr>
-                <th>{{{ Lang::get('confide::confide.e_mail') }}}</th>
+                <!-- <th>{{{ Lang::get('confide::confide.e_mail') }}}</th> -->
+                <th>{{Lang::get('user_texts.email')}}</th>
                 <td><strong>{{$profile['email']}}</strong><br>
                 <span><em>{{Lang::get('user_texts.note_change_email')}}</em></span></td>
             </tr>
@@ -61,12 +62,12 @@
     <table class="table register">
         <tbody>
             <tr>
-                <th style="width:180px;">{{{ Lang::get('confide::confide.password') }}}</th>
+                <th style="width:180px;">{{Lang::get('user_texts.password')}}</th>
                 <td><input type="password" autocomplete="off" value="" class="form-control" id="password" name="password"><br>
                 <span>{{Lang::get('user_texts.note_input_pass')}}</span></td>
             </tr>
             <tr>
-                <th>{{{ Lang::get('confide::confide.password_confirmation') }}}</th>
+                <th>{{Lang::get('user_texts.confirm_password')}}</th>
                 <td><input type="password" autocomplete="off" value="" class="form-control" id="password2" name="password2"><br>
                 <span>{{Lang::get('user_texts.note_input_pass2')}}</span></td>
             </tr>
