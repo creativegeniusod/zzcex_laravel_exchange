@@ -87,6 +87,7 @@
 
       <ul class="nav navbar-nav navbar-right">
                     <li><a href="<?=url('/', $parameters = array(), $secure = null);?>"><i class="glyphicon glyphicon-home"></i></a></li>
+                     <li><a href="<?=url('/admin/logout', $parameters = array(), $secure = null);?>"><i class="glyphicon glyphicon-log-out"></i></a></li>
                   </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

@@ -107,7 +107,7 @@ Route::post( 'user/social_verify_token', 'AuthController@socialAjVerifyToken' );
 //Only logged in admin can access or send requests to these pages
 Route::group(['prefix' => 'admin','middleware' =>array('auth','admin_auth')], function(){
 
-   /* Route::post('admin_logout', 'AdminAuth\LoginController@logout');*/
+    Route::get('logout', 'AdminAuth\LoginController@logout');
     Route::get('/', 'AdminAuth\Admin_SettingController@routePage');
     Route::get('setting', 'AdminAuth\Admin_SettingController@routePage');
     Route::get('setting/{page}', 'AdminAuth\Admin_SettingController@routePage');

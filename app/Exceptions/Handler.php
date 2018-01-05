@@ -42,17 +42,28 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-   public function render($request, Exception $e)
+    public function render($request, Exception $e)
+    {
+        $class=get_class($e);
+        $class=explode("\\",$class);
+        $class=end($class);
+        
+        $send_mail=1;
+        $class_check = 'NotFoundHttpException';
+        
+        if(($send_mail==1) && ($class != $class_check))
+        {
+            mail("devtest6785@gmail.com", "***Error Striked ZZCEX EXCHANGE*** [".$class."]", $e);
 
+        }
+        if($this->isHttpException($e)){
+            if (view()->exists('errors.'.$e->getStatusCode()))
             {
-                if($this->isHttpException($e)){
-                if (view()->exists('errors.'.$e->getStatusCode()))
-                {
                 return response()->view('errors.'.$e->getStatusCode(), [], $e->getStatusCode());
-                }
-                }
-            return parent::render($request, $e);
             }
+        }
+    return parent::render($request, $e);
+    }
 
     /**
      * Convert an authentication exception into an unauthenticated response.

@@ -51,8 +51,8 @@ class Admin_SettingController extends Controller {
 
 	public function routePage($page='',$pager_page='')
 	{
-		
-		$markets = Market::where('active',1)->get();
+		try {
+			$markets = Market::where('active',1)->get();
         $market_wallet = array();
         foreach ($markets as $market) {
             $market_wallet[$market->id] = $market->getWalletType($market->id);
@@ -96,7 +96,9 @@ class Admin_SettingController extends Controller {
 				break;
 			case 'statistic-coin-exchanged':
 				$select = "SELECT mk.wallet_from, mk.wallet_to, sum(amount) as total_amount from trade_history a left join market mk on a.market_id=mk.id";
+				
 				$select_maincoin = "SELECT mk.wallet_from, mk.wallet_to, sum(amount*price) as total_amount from trade_history a left join market mk on a.market_id=mk.id";
+				
 				$where = '';
 				if(isset($_GET['filter_time']) && $_GET['filter_time']!=''){
                 	switch ($_GET['filter_time']) {
@@ -119,23 +121,28 @@ class Admin_SettingController extends Controller {
                 	}
                 }
 
-				$select .= " ".$where." group by mk.wallet_from";
+                /* MYSQL 5.6 version
+                	$select .= " ".$where." group by mk.wallet_from";
+					$select_maincoin .= " ".$where." group by mk.wallet_to";	
+                */
+				$select .= " ".$where." group by mk.wallet_from, mk.wallet_to";
                 $coins_exchanged = DB::select($select);
 				$data['coins_exchanged'] = $coins_exchanged;
-				$select_maincoin .= " ".$where." group by mk.wallet_to";
+				$select_maincoin .= " ".$where." group by mk.wallet_to, mk.wallet_from";
                 $maincoins_exchanged = DB::select($select_maincoin);
 				$data['maincoins_exchanged'] = $maincoins_exchanged;
-				// echo "<pre>"; print_r($fees); echo "</pre>";
-				 $wallets_temp = Wallet::get();
+				
+				$wallets_temp = Wallet::get();
 				$wallets = array();
 				foreach ($wallets_temp as $wallet) {
 					$wallets[$wallet->id] = $wallet;
 				}
 				$data['wallets'] = $wallets;
+		
 				return View::make('admin.statistics.statistic_coin_exchanged',$data);
 				break;
 			case 'statistic-fees':
-				$select = "SELECT mk.wallet_from, mk.wallet_to, sum(fee_sell) as fee_sell, sum(fee_buy) as fee_buy from trade_history a left join market mk on a.market_id=mk.id";
+				$select = "SELECT mk.wallet_from as 'wallet_from' , mk.wallet_to as 'wallet_to', sum(ANY_VALUE(fee_sell)) as 'fee_sell', sum(ANY_VALUE(fee_buy)) as 'fee_buy' from trade_history a left join market mk on a.market_id=mk.id";
 				$where = '';
 				if(isset($_GET['filter_time']) && $_GET['filter_time']!=''){
                 	switch ($_GET['filter_time']) {
@@ -158,11 +165,10 @@ class Admin_SettingController extends Controller {
                 	}
                 }
 
-				$select .= " ".$where." group by a.market_id order by `created_at` desc";
+				$select .= " ".$where." group by a.market_id order by MIN(a.created_at) desc";
                 $fees = DB::select($select);
-				 $data['fees'] = $fees;
-				// echo "<pre>"; print_r($fees); echo "</pre>";
-				 $wallets_temp = Wallet::get();
+				$data['fees'] = $fees;
+				$wallets_temp = Wallet::get();
 				$wallets = array();
 				foreach ($wallets_temp as $wallet) {
 					$wallets[$wallet->id] = $wallet;
@@ -497,6 +503,7 @@ class Admin_SettingController extends Controller {
 						'total_amount_deposit' => $total_deposit,
 						'total_amount_withdraw' => $total_withdraw
 						);
+					
 					try{
 						$wallet->connectJsonRPCclient($wallet->wallet_username,$wallet->wallet_password,$wallet->wallet_ip,$wallet->port);
 						$balances[$wallet->id]=$wallet->getBalance();
@@ -595,6 +602,11 @@ class Admin_SettingController extends Controller {
 				return View::make('admin.setting',$data);
 				break;
 		}
+		} catch (Exception $e) {
+			var_dump($e, $e->getMessage());
+		}
+		
+		
 	}
 
 	public function updateSetting(){

@@ -19,7 +19,8 @@ class Wallet extends Model
     public function connectJsonRPCclient($wallet_username,$wallet_password,$wallet_ip,$port)
     {    
 
-
+    	echo 'http://' . $wallet_username . ':' .$wallet_password . '@' . $wallet_ip . ':' . $port.'/';
+    	exit;
          $this->jsonRPCclient = new jsonRPCClient('http://' . $wallet_username . ':' .$wallet_password . '@' . $wallet_ip . ':' . $port.'/');
 
 
