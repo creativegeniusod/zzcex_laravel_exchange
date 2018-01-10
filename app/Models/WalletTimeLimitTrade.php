@@ -9,3 +9,4 @@ class WalletTimeLimitTrade extends Model
     protected $table = 'wallet_timelimittrade';
     public $timestamps = false;
 }
+

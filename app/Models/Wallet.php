@@ -3,12 +3,14 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\libraries\jsonRPCClient;
+use Config;
 
 class Wallet extends Model
 {
 	protected $table = 'wallets';
     public $timestamps = false;
 	private $jsonRPCclient;
+	
 	public function getType($wallet_id){
 		$type = Wallet::where('id', '=', $wallet_id)->select('type')->first();
         if(isset($type->type))
@@ -16,10 +18,23 @@ class Wallet extends Model
         else return '';
 	}
 
+	/**
+	* This function acts like a wrapper to main Json-RPC call & logic. 
+	* Internally, it takes url like :- http://wallet_username:wallet_password@127.0.0.1:9335/
+	* @param  string $wallet_username:- Username of the wallet
+	* @param  string @$wallet_password:- Password of the wallet
+	* @param  string @$wallet_ip:- Local or remote server ip, where wallet is configured
+	* @param  string @$port:- Port no, on which particular wallet is running
+	*/
     public function connectJsonRPCclient($wallet_username,$wallet_password,$wallet_ip,$port)
     {    
+    	$wallet_username = Config::get("constants.zozocoin.wallet_username");
+    	$wallet_password = Config::get("constants.zozocoin.wallet_password");
+    	$wallet_ip = Config::get("constants.zozocoin.wallet_ip");
+    	$port = Config::get("constants.zozocoin.port");
 
-    	echo 'http://' . $wallet_username . ':' .$wallet_password . '@' . $wallet_ip . ':' . $port.'/';
+    	pr('http://' . $wallet_username . ':' .$wallet_password . '@' . $wallet_ip . ':' . $port.'/');
+ 
     	exit;
          $this->jsonRPCclient = new jsonRPCClient('http://' . $wallet_username . ':' .$wallet_password . '@' . $wallet_ip . ':' . $port.'/');
 

@@ -121,9 +121,11 @@ class jsonRPCClient {
                 );
                 $request = json_encode($request);
                 $this->debug && $this->debug.='***** Request *****'."\n".$request."\n".'***** End Of request *****'."\n\n";
-
+                //var_dump($this->url);
+                //exit("s");
                 // performs the HTTP POST               
                 $ch = curl_init($this->url);
+
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
                 curl_setopt($ch, CURLOPT_POST, 1);

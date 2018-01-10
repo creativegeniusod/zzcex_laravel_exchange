@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'ZZCEX EXCHANGE'),
 
     /*
     |--------------------------------------------------------------------------
@@ -180,8 +180,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
-         Collective\Html\HtmlServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
 
     ],
 
@@ -232,8 +231,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
-      'HTML' => Collective\Html\HtmlFacade::class,
-      'Input' => Illuminate\Support\Facades\Input::class,
+        'HTML' => Collective\Html\HtmlFacade::class,
+        'Input' => Illuminate\Support\Facades\Input::class,
 
     ],
 

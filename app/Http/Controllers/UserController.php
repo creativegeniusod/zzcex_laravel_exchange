@@ -234,23 +234,33 @@ class UserController extends Controller {
      *
      * @param  string  $code
      */
-    public function confirm( $code )
-    {
-        $Url = User::where('confirmation_code',$code)->first();
-         
-        if (!empty($Url))
-        {
-            User::where('confirmation_code', $code)->update(array('confirmed'=>1));
-            $notice_msg = "Your account has been confirmed! You may now login.";
-                        return Redirect::action('UserController@login')
-                            ->with( 'notice', $notice_msg );
+    public function confirm($code=false){   
+        $code = !empty($code)?trim($code):"";
+        $message = "Missing Confirmation Code.";
+        $messageType = "error";
+                        
+        if($code){
+            $userInfo = User::where('confirmation_code',$code)->first();
+            if(!empty($userInfo)){
+                $confirmStatus = trim($userInfo['confirmed']);
+                $confirmationCode = !empty($userInfo['confirmation_code'])?(trim($userInfo['confirmation_code'])):"";
+                $username = trim($userInfo['username']);
+                if($confirmStatus)
+                    $message = "Your email address is already confirmed.";
+                elseif ($confirmationCode !== $code)
+                    $message = "Invalid Confirmation Code.";
+                else{
+                    User::where('confirmation_code', $code)->update(array('confirmed'=>1));
+                    //generate zozocoin wallet address for user
+                    
+                    $message = "Your account has been confirmed! You may now login.";
+                    $messageType = "notice";
+                }
+            }            
         }
-        else
-        {
-            $error_msg = "Wrong confirmation code.";
-                        return Redirect::action('UserController@login')
-                            ->with( 'error', $error_msg );
-        }
+
+        return Redirect::action('UserController@login')->with($messageType, $message);
+        
     }
 
     /**
